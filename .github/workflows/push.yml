@@ -23,7 +23,7 @@ jobs:
         # works sequentially 
         steps:
         - name: Checkout code
-          uses:  action/checkout@v4.2.2
+          uses: actions/checkout@v4
 
         - name: Run tests 
           run: npm test
