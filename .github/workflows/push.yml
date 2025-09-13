@@ -1,0 +1,29 @@
+on:
+    # a trigger (push happend)
+    push:
+        # on those branches
+        branches:
+            - main
+            - "release/**"
+        # specific paths inside the branches
+        paths:
+            - "src/**"
+            - "test/**"
+            - "package.json"
+    # another trigger (pull)
+    pull_request:
+        # specifing the btranches
+        branches:
+            - main
+            - "release/**"
+# when those triggers happend do this 
+jobs:
+    test:
+        runs-on: ubuntu-latest
+        # works sequentially 
+        steps:
+        - name: Checkout code
+          uses:  action/checkout@v4.2.2
+
+        - name: Run tests 
+          run: npm test
