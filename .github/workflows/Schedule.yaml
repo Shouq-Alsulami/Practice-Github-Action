@@ -1,0 +1,25 @@
+name: Scheduled & Manual
+on:
+    schedule:
+        - cron: "0 0 * * 1" # Mondays at 00:00 UTC
+    workflow_dispatch:
+        inputs:
+            environment:
+                description: Which environment?
+                type: choice
+                options: [dev, staging, prod]
+                default: dev
+            message:
+                description: Message to print
+                required: false
+                default: "Hello from manual run"
+
+jobs:
+    run-task:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Print context
+              run: |
+                  echo "Event: $GITHUB_EVENT_NAME"
+                  echo "Env input: ${{ inputs.environment }}"
+                  echo "Msg: ${{ inputs.message }}"
